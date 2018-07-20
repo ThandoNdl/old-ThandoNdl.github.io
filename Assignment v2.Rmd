@@ -1,0 +1,54 @@
+---
+title: 'Developing Data Products: Plotly'
+author: "Noluthando Ndlovu"
+date: "20 July 2018"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Violent Crime Rates by US State
+
+Statistics in arrests per *100 000* residents for
+
+- Assault
+- Murder
+- Rape
+
+Also given is the percentage of the population living in Urban Areas
+
+## Getting the data
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, comment=""}
+library(plotly)
+library(datasets)
+data <- datasets::USArrests
+head(data, n = 2)
+summary(data)
+```
+
+## Is assault correllated with murder?
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, comment=""}
+plot_ly(data, x = ~Murder, y = ~Assault,
+        type = "scatter", color = ~UrbanPop)
+```
+
+## Is rape correllated with murder?
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, comment=""}
+plot_ly(data, x = ~Murder, y = ~Rape,
+        type = "scatter", color = ~UrbanPop)
+```
+
+## Observations
+
+From the previous slide, there a few things we can pick up:
+- as the number of assaults increases, the number of murders also increase
+- areas with a smaller percentage of people living in urban rates have lower crime rates (both assault and murder)
+
+Nothing obvious arises from the relationship betwwen number of rapes and number of murders.
